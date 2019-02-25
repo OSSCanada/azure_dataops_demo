@@ -59,3 +59,7 @@ variable "COSMOSDB_KIND" {
 variable "COSMOSDB_FAILOVER_LOCATION" {
   default = "Canada East"
 }
+
+variable "AZURE_FUNCTIONAPP_NAME" {
+  default = "testfunc"
+}
