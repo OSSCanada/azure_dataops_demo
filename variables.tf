@@ -4,7 +4,7 @@ variable "AZURE_ENVIRONMENT_TAG" {
 
 
 variable "AZURE_RESOURCE_GROUP_NAME" {
-  default = "rkdevopsdemo"
+  default = "rkdataopsdemo"
 }
 
 variable "AZURE_DC_LOCATION" {

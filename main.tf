@@ -8,12 +8,17 @@ provider "azurerm" {
   version = "=1.21.0"
 }
 
+resource "random_integer" "ri" {
+  min = 10000
+  max = 99999
+}
+
 resource "azurerm_resource_group" "test" {
   name     = "${var.AZURE_RESOURCE_GROUP_NAME}"
   location = "${var.AZURE_DC_LOCATION}"
 }
 resource "azurerm_eventhub_namespace" "test" {
-  name                = "${var.AZURE_EVENTHUB_NAMESPACE}"
+  name                = "${var.AZURE_EVENTHUB_NAMESPACE}${random_integer.ri.result}"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   sku                 = "${var.AZURE_EVENTHUB_SKU}"
@@ -26,7 +31,7 @@ resource "azurerm_eventhub_namespace" "test" {
 }
 
 resource "azurerm_eventhub" "test" {
-  name                = "${var.AZURE_EVENTHUB_HUBNAME}"
+  name                = "${var.AZURE_EVENTHUB_HUBNAME}${random_integer.ri.result}"
   namespace_name      = "${azurerm_eventhub_namespace.test.name}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   partition_count     = "${var.AZURE_EVENTHUB_PARTITION_COUNT}"
@@ -34,14 +39,8 @@ resource "azurerm_eventhub" "test" {
 }
 
 data "azurerm_data_lake_store" "test" {
-  name                = "${var.AZURE_DATA_LAKE_STORE_NAME}"
-  resource_group_name = "${azurerm.resource_group_name.test.name}"
-}
-
-
-resource "random_integer" "ri" {
-  min = 10000
-  max = 99999
+  name                = "${var.AZURE_DATA_LAKE_STORE_NAME}${random_integer.ri.result}"
+  resource_group_name = "${azurerm_resource_group.test.name}"
 }
 
 resource "azurerm_cosmosdb_account" "db" {
