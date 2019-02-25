@@ -37,3 +37,34 @@ data "azurerm_data_lake_store" "test" {
   name                = "${var.AZURE_DATA_LAKE_STORE_NAME}"
   resource_group_name = "${azurerm.resource_group_name.test.name}"
 }
+
+
+resource "random_integer" "ri" {
+  min = 10000
+  max = 99999
+}
+
+resource "azurerm_cosmosdb_account" "db" {
+  name                = "${var.COSMOSDB_NAME}${random_integer.ri.result}"
+  location            = "${azurerm_resource_group.test.location}"
+  resource_group_name = "${azurerm_resource_group.test.name}"
+  offer_type          = "${var.COSMOSDB_OFFER}"
+  kind                = "${var.COSMOSDB_KIND}"
+
+  enable_automatic_failover = true
+
+  consistency_policy {
+    consistency_level       = "Session"
+  }
+
+  geo_location {
+    location          = "${azurerm_resource_group.test.location}"
+    failover_priority = 0
+  }
+
+  geo_location {
+    location          = "${var.COSMOSDB_FAILOVER_LOCATION}"
+    failover_priority = 1
+  }
+
+}

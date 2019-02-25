@@ -43,3 +43,19 @@ variable "AZURE_EVENTHUB_MESSAGE_RETENTION" {
 variable "AZURE_DATA_LAKE_STORE_NAME" {
   default="testdatalake"
 }
+
+variable "COSMOSDB_NAME" {
+  default = "testdb"
+}
+
+variable "COSMOSDB_OFFER" {
+  default = "Standard"
+}
+
+variable "COSMOSDB_KIND" {
+  default="MongoDB"
+}
+
+variable "COSMOSDB_FAILOVER_LOCATION" {
+  default = "Canada East"
+}
