@@ -69,7 +69,7 @@ resource "azurerm_cosmosdb_account" "db" {
 }
 
 resource "azurerm_storage_account" "test" {
-  name                     = "${var.AZURE_FUNCTIONAPP_NAME}stor${random_integer.ri.result}"
+  name                     = "${var.AZURE_FUNCTIONAPP_NAME}${random_integer.ri.result}stor"
   resource_group_name      = "${azurerm_resource_group.test.name}"
   location                 = "${azurerm_resource_group.test.location}"
   account_tier             = "Standard"
@@ -77,7 +77,7 @@ resource "azurerm_storage_account" "test" {
 }
 
 resource "azurerm_app_service_plan" "test" {
-  name                = "${var.AZURE_FUNCTIONAPP_NAME}plan"
+  name                = "${var.AZURE_FUNCTIONAPP_NAME}${random_integer.ri.result}plan"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   kind                = "FunctionApp"
@@ -89,7 +89,7 @@ resource "azurerm_app_service_plan" "test" {
 }
 
 resource "azurerm_function_app" "test" {
-  name                      = "${var.AZURE_FUNCTIONAPP_NAME}"
+  name                      = "${var.AZURE_FUNCTIONAPP_NAME}${random_integer.ri.result}"
   location                  = "${azurerm_resource_group.test.location}"
   resource_group_name       = "${azurerm_resource_group.test.name}"
   app_service_plan_id       = "${azurerm_app_service_plan.test.id}"
