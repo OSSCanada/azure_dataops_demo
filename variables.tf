@@ -53,7 +53,7 @@ variable "COSMOSDB_OFFER" {
 }
 
 variable "COSMOSDB_KIND" {
-  default="MongoDB"
+  default="GlobalDocumentDB"
 }
 
 variable "COSMOSDB_FAILOVER_LOCATION" {
