@@ -96,13 +96,13 @@ resource "azurerm_function_app" "test" {
   storage_connection_string = "${azurerm_storage_account.test.primary_connection_string}"
 }
 
-resource "azurerm_databricks_workspace" "test" {
-  name                = "databrickstest${random_integer.ri.result}"
-  resource_group_name = "${azurerm_resource_group.test.name}"
-  location            = "${azurerm_resource_group.test.location}"
-  sku                 = "standard"
+# resource "azurerm_databricks_workspace" "test" {
+#   name                = "databrickstest${random_integer.ri.result}"
+#   resource_group_name = "${azurerm_resource_group.test.name}"
+#   location            = "${azurerm_resource_group.test.location}"
+#   sku                 = "standard"
 
-  tags {
-    environment = "${var.AZURE_ENVIRONMENT_TAG}"
-  }
-}
+#   tags {
+#     environment = "${var.AZURE_ENVIRONMENT_TAG}"
+#   }
+# }
