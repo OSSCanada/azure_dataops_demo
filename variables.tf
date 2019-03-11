@@ -56,6 +56,11 @@ variable "COSMOSDB_KIND" {
   default="GlobalDocumentDB"
 }
 
+variable "COSMOSDB_CONSISTENCY_LEVEL" {
+  default = "Session"
+}
+
+
 variable "COSMOSDB_FAILOVER_LOCATION" {
   default = "Canada East"
 }
